@@ -39,7 +39,7 @@ async function execute (state, properties) {
     buildDataArray.push(buildData)
   };
 
-  LOGGER.info(`Resulting build data for upload to UCV is ${JSON.stringify(buildData)}`)  
+  LOGGER.info(`Resulting build data for upload to UCV is ${JSON.stringify(buildDataArray)}`)  
   await UCVClient.uploadBuildBulk(buildDataArray)
   LOGGER.info('Tekton PipelineRuns uploaded successfully.')
 }
