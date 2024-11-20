@@ -1,0 +1,20 @@
+{
+  "presets": [
+    [
+      "@babel/env", {
+        "targets": {
+          "node": "current"
+        },
+        "forceAllTransforms": true
+      }
+    ]
+  ],
+  "plugins": [
+    "add-module-exports",
+    ["@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
+  ]
+}

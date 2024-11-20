@@ -1,0 +1,73 @@
+{
+  "name": "ucv-ext-sdk-template",
+  "version": "0.1.5",
+  "description": "Template plugin for UrbanCode Velocity",
+  "license": "MIT",
+  "engines": {
+    "node": "6.x"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "preinstall": "node ./scripts/installLocalDependencies.js",
+    "build": "rm -rf build && babel ./src --out-dir build",
+    "build-runnable": "webpack --progress",
+    "dist": "cross-env NODE_OPTIONS=--openssl-legacy-provider BUILD_ENV=production NODE_ENV=production rm -rf dist && babel ./src --out-dir dist",
+    "dist-runnable": "cross-env NODE_OPTIONS=--openssl-legacy-provider BUILD_ENV=production NODE_ENV=production npm run build-runnable",
+    "lint": "eslint .",
+    "lint:ci": "eslint -f json -o eslint-report.json --ext=js .",
+    "lint-fix": "eslint --fix .",
+    "start": "babel-node src/index-runnable",
+    "test": "npm run lint && npm run test-unit:xml && npm run test-func:xml",
+    "test:base": "nyc --reporter=cobertura --reporter=lcov --reporter=text mocha --recursive --require @babel/register",
+    "test-unit:xml": "npm run test:base -- ./test/unit --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/unit/results.xml",
+    "test-func:xml": "echo 'No functional tests to run!'"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.6",
+    "@kubernetes/client-node": "^0.22.0",
+    "@velocity/api-client": "file:local-dependencies/velocity-api-client-1.0.524.tgz",
+    "@velocity/logger": "file:local-dependencies/velocity-logger-1.0.108.tgz",
+    "@velocity/ucv-ext-npm-wrapper": "file:local-dependencies/velocity-ucv-ext-npm-wrapper-1.1.5.tgz",
+    "cli-table": "^0.3.1",
+    "source-map-support": "^0.5.6",
+    "table": "^5.4.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.2.0",
+    "@velocity/eslint-config": "file:local-dependencies/velocity-eslint-config-0.0.232.tgz",
+    "babel-inline-import-loader": "^1.0.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "chai": "3.5.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.4.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.0.1",
+    "mocha-junit-reporter": "^1.18.0",
+    "nock": "^9.6.1",
+    "nyc": "^13.0.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "nyc": {
+    "exclude": [
+      "src/endpoints",
+      "test"
+    ]
+  }
+}

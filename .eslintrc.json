@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "standard",
+    "@velocity/eslint-config"
+  ],
+  "plugins": [
+    "chai-friendly"
+  ],
+  "rules": {
+    "no-console": 1,
+    "no-unused-expressions": 0,
+    "chai-friendly/no-unused-expressions": 2
+  },
+  "env": {
+    "mocha": true
+  }
+}

@@ -1,0 +1,12 @@
+.DS_Store
+node_modules
+build
+build-runnable
+dist
+dist-runnable
+coverage
+.nyc_output
+test-results
+.sonarlint
+.scannerwork
+eslint-report.json
